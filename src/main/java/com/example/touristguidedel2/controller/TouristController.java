@@ -73,7 +73,7 @@ public class TouristController {
 
     @PostMapping("/update")
     public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
-        service.saveAttraction(attraction);
+        service.updateAttraction(attraction);
         return "redirect:/attractions";
     }
 }

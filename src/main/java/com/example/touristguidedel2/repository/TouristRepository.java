@@ -71,11 +71,11 @@ public class TouristRepository {
 
 
     public void updateAttraction(TouristAttraction attraction) {
-//        TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
-            attraction.setName(attraction.getName());
-            attraction.setDescription(attraction.getDescription());
-            attraction.setLocation(attraction.getLocation());
-            attraction.setTags(attraction.getTags());
+       TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
+            updatedAttraction.setName(attraction.getName());
+            updatedAttraction.setDescription(attraction.getDescription());
+            updatedAttraction.setLocation(attraction.getLocation());
+            updatedAttraction.setTags(attraction.getTags());
 
 
     }
