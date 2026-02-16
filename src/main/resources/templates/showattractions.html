@@ -41,6 +41,26 @@
                 delete</a>
         </td>
         <td>
+    <span th:each="tag : ${attraction.tags}"
+          th:text="${tag}"
+          style="display:inline-block; background-color: seashell; color:black; padding:2px 6px; border-radius:4px; margin-right:4px; font-size:0.9em;">
+    </span>
+        </td>
+        <td>
+            <a th:href="@{/attractions/{name}(name=${attraction.name})}"
+               style="background:#28a745; color:white; padding:5px 10px; border-radius:5px; text-decoration:none;">View</a>
+        </td>
+        <td>
+            <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}"
+               style="background-color: cadetblue;; color:white; padding:5px 10px; border-radius:5px; text-decoration:none;">Edit</a>
+        </td>
+        <td>
+            <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post" style="display:inline;">
+                <button type="submit" style="background-color: cornflowerblue; color:white; padding:5px 10px; border:none; border-radius:5px; cursor:pointer;">Delete</button>
+            </form>
+        </td>
+
+        <td>
             <a th:href="@{/attractions/{name}(name=${attraction.name})}">
                 View</a>
         </td>

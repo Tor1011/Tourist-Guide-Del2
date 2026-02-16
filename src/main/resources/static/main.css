@@ -1,26 +1,87 @@
 body {
-    max-width: 500px;
+    max-width: 1400px;
     margin: auto;
-    background: white;
-    padding: 10px;
+    background: #f9f9f9;
+    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 h1 {
     font-family:Arial;
-    font-size: 1.5em;
+    font-size: 2em;
+    color: #333;
+    text-align:center;
+}
+form{
+    background: #fff;
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 label {
-    width: 150px;
     display: inline-block;
+    width: 120px;
+    margin-bottom: 10px;
 }
-table, th, td {
-    border: 1px solid black;
+input[type="text"], textarea{
+    width: 300px;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"]{
+    margin-right: 5px;
+}
+button{
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color:white;
+    border:none;
+    border-radius: 5px;
+    cursor:pointer;
+}
+button:hover{
+    background-color: #005fa3;
+}
+a{
+    display:  inline-block;
+    margin-top: 15px;
+    color: #0077cc;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+}
+table {
+    width: 100%;
     border-collapse: collapse;
-    padding: 5px;
+    margin-top: 20px;
 }
-th {
+th td {
+    border: 1px solid #ccc;
+    padding: 10px;
     text-align: left;
 }
-select, input[type="text"], input[type="number"]{
-    width:200px;
-    box-sizing:border-box;
+th{
+    background-color: #0077cc;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+
+    a {
+        color: #0077cc;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+    .name-column {
+        font-weight: bold;
+        font-size: 1.1em;
+        color: #0077cc;
+
 }

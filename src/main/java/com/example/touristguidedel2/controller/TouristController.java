@@ -54,9 +54,8 @@ public class TouristController {
     public String addAttraction(Model model) {
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
-        model.addAttribute("cities", service.getCities());
         model.addAttribute("tags", Category.values());
-        return "add New attraction";
+        return "addnewattraction";
     }
 
     @PostMapping("/save")
@@ -69,8 +68,8 @@ public class TouristController {
     public String editAttraction(@PathVariable String name, Model model) {
         model.addAttribute("attraction", service.findAttractionByName(name));
         model.addAttribute("cities", service.getCities());
-        model.addAttribute("tags", Category.values());
-        return "Edit Attraction";
+        model.addAttribute("tags", service.getTags());
+        return "EditAttraction";
     }
 
     @PostMapping("/update")
