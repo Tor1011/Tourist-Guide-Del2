@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel ="stylesheet" href="main.css">
+
+</head>
+<body>
+<h1 th:text="${attraction.getName()} + ' tags'"/>
+
+<table>
+
+       <tr th:each="tag:${attraction.getTags()}">
+
+           <td th:text="${tag}">
+
+           </td>
+
+  </tr>
+
+</table>
+
+</body>
+</html>
