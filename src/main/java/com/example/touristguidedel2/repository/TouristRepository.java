@@ -54,4 +54,13 @@ public class TouristRepository {
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
     }
+
+    public TouristAttraction findAttractionByName(String name) {
+        for (TouristAttraction touristAttraction : attractions) {
+            if (touristAttraction.getName().equalsIgnoreCase(name)) {
+                return touristAttraction;
+            }
+        }
+        return null;
+    }
 }
