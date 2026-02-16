@@ -37,6 +37,10 @@
         </td>
 
         <td>
+            <a th:href="@{/attractions/delete/{name}(name=${attraction.name})}">
+                delete</a>
+        </td>
+        <td>
             <a th:href="@{/attractions/{name}(name=${attraction.name})}">
                 View</a>
         </td>
