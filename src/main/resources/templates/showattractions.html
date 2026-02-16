@@ -5,13 +5,21 @@
     <title>Show attractions</title>
     <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
+
 <h1>Attractions</h1>
+
 <table>
-    <tr th:if="${attractions.isEmpty()}">There are no attractions yet</tr>
+    <td th:if="${attractions.isEmpty()}">
+        <td colspan="4">There are no attractions yet</td>
+    </tr>
+
     <tr th:if="${!attractions.isEmpty()}">
-        <th>Attraction</th>
+        <th>Name</th>
         <th>Description</th>
+        <th>Tags</th>
+        <th>View</th>
     </tr>
 
     <tr th:each="attraction : ${attractions}">
@@ -19,14 +27,18 @@
         <td th:text="${attraction.description}"></td>
 
         <td>
-            <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}">edit</a>
+            <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}">
+                edit</a>
+
         </td>
         <td>
-            <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}">tag</a>
+            <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}">
+                tags</a>
         </td>
 
         <td>
-            <a th:href="@{/attractions/{name}(name=${attraction.name})}">View</a>
+            <a th:href="@{/attractions/{name}(name=${attraction.name})}">
+                View</a>
         </td>
     </tr>
 </table>
