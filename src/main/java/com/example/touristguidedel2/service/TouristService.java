@@ -22,4 +22,8 @@ public class TouristService {
     public TouristAttraction findAttractionByName(String name) {
         return repository.findAttractionByName(name);
     }
+
+    public void saveAttraction(TouristAttraction attraction) {
+        repository.saveAttraction(attraction);
+    }
 }

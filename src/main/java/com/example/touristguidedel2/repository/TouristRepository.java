@@ -64,5 +64,10 @@ public class TouristRepository {
         return null;
     }
 
+    // Metode til at kunne tilføje attraktioner //
+    public void saveAttraction(TouristAttraction attraction) {
+        attractions.add(attraction);
+    }
+
 
 }

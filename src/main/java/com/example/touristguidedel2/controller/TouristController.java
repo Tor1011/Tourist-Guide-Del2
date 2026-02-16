@@ -1,12 +1,11 @@
 package com.example.touristguidedel2.controller;
 
+import com.example.touristguidedel2.model.Category;
 import com.example.touristguidedel2.model.TouristAttraction;
 import com.example.touristguidedel2.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -46,5 +45,20 @@ public class TouristController {
     model.addAttribute("attraction", attraction);
     return "showtags";
 }
+
+@GetMapping("/add")
+    public String addAttraction(Model model){
+        TouristAttraction attraction = new TouristAttraction();
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("tags", Category.values());
+        return "addnewattraction";
+}
+
+@PostMapping("/save")
+    public String saveAttraction(@ModelAttribute TouristAttraction attraction){
+        service.saveAttraction(attraction);
+        return "redirect:/attractions";
+}
+
 
 }

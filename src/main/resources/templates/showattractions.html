@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Show attractions</title>
-    <link rel ="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 <h1>Attractions</h1>
 <table>
     <tr th:if="${attractions.isEmpty()}">There are no attractions yet</tr>
     <tr th:if="${!attractions.isEmpty()}">
-        <th>Attraction</th><th>Description</th>
+        <th>Attraction</th>
+        <th>Description</th>
     </tr>
 
     <tr th:each="attraction : ${attractions}">
@@ -22,9 +23,10 @@
         </td>
 
         <td>
-                       <a th:href="@{/attractions/{name}(name=${attraction.name})}">View</a>
+            <a th:href="@{/attractions/{name}(name=${attraction.name})}">View</a>
         </td>
     </tr>
 </table>
+<a th:href="@{/attractions/add}">Add new attraction</a>
 </body>
 </html>

@@ -15,12 +15,19 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
+    public TouristAttraction() {
+    }
+
     public String getName() {
         return name;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public List<Category> getTags() {
@@ -38,5 +45,10 @@ public class TouristAttraction {
     public void setTags(List<Category> tags) {
         this.tags = tags;
     }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
+
 
