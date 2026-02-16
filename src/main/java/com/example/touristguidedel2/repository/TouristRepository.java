@@ -50,7 +50,6 @@ public class TouristRepository {
                 List.of(Category.CULTURE, Category.FAMILY_FRIENDLY, Category.HISTORY)
         ));
     }
-
     // Metode til at retunere en attraktion //
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
@@ -80,6 +79,7 @@ public class TouristRepository {
 
 
     }
+
 
 
 
