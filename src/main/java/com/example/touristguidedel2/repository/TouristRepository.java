@@ -50,6 +50,7 @@ public class TouristRepository {
                 List.of(Category.CULTURE, Category.FAMILY_FRIENDLY, Category.HISTORY)
         ));
     }
+
     // Metode til at retunere en attraktion //
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
@@ -70,15 +71,28 @@ public class TouristRepository {
     }
 
 
-    // Metode til at kunne opdatere en attraktion //
-    public TouristAttraction updateAttraction(TouristAttraction attraction) {
+    public void updateAttraction(TouristAttraction attraction) {
         TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
-        if (updatedAttraction != null) {
-            updatedAttraction.setDescription(attraction.getDescription());
-            updatedAttraction.setLocation(attraction.getLocation());
-            updatedAttraction.setTags(attraction.getTags());
-        }
-        return updatedAttraction;
+        updatedAttraction.setName(attraction.getName());
+        updatedAttraction.setDescription(attraction.getDescription());
+        updatedAttraction.setLocation(attraction.getLocation());
+        updatedAttraction.setTags(attraction.getTags());
 
     }
+
+    public void deleteAttraction(String nameOfAttraction) {
+        TouristAttraction attraction = findAttractionByName(nameOfAttraction);
+        attractions.remove(attraction);
+    }
+    public List<String> getCities(){
+        return attractions.stream()
+                .map(TouristAttraction::getLocation)
+                .distinct()
+                .toList();
+    }
+    public List<Category> getTags(){
+        return List.of(Category.values());
+    }
+
+
 }
