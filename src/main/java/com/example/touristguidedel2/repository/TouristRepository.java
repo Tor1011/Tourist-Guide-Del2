@@ -84,6 +84,15 @@ public class TouristRepository {
         TouristAttraction attraction = findAttractionByName(nameOfAttraction);
         attractions.remove(attraction);
     }
+    public List<String> getCities(){
+        return attractions.stream()
+                .map(TouristAttraction::getLocation)
+                .distinct()
+                .toList();
+    }
+    public List<Category> getTags(){
+        return List.of(Category.values());
+    }
 
 
 }

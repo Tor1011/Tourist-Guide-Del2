@@ -1,10 +1,12 @@
 package com.example.touristguidedel2.service;
 
+import com.example.touristguidedel2.model.Category;
 import com.example.touristguidedel2.model.TouristAttraction;
 import com.example.touristguidedel2.repository.TouristRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TouristService {
@@ -33,5 +35,11 @@ public class TouristService {
 
     public void deleteAttraction(String nameOfAttraction){
         repository.deleteAttraction(nameOfAttraction);
+    }
+    public List<String> getCities() {
+        return repository.getCities();
+    }
+    public List<Category>getTags(){
+        return repository.getTags();
     }
 }
