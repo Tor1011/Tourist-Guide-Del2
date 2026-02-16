@@ -38,27 +38,31 @@ public class TouristController {
         return "attraction";
     }
 
-    @GetMapping("/{name}/tags")
-    public String findTags(@PathVariable String name, Model model) {
-        TouristAttraction attraction = service.findAttractionByName(name);
+@GetMapping("/{name}/tags")
+    public String findTags(@PathVariable String name, Model model){
+    TouristAttraction attraction = service.findAttractionByName(name);
 
+        if (attraction == null) {
+            model.addAttribute("errorMessage", "The attraction " + name + " has not been found");
+            return "error";
+        }
         model.addAttribute("attraction", attraction);
         return "showtags";
     }
 
-    @GetMapping("/add")
-    public String addAttraction(Model model) {
+@GetMapping("/add")
+    public String addAttraction(Model model){
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", Category.values());
         return "addnewattraction";
-    }
+}
 
-    @PostMapping("/save")
-    public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
+@PostMapping("/save")
+    public String saveAttraction(@ModelAttribute TouristAttraction attraction){
         service.saveAttraction(attraction);
         return "redirect:/attractions";
-    }
+}
 
     @GetMapping("/{name}/edit")
     public String editAttraction(@PathVariable String name, Model model) {
