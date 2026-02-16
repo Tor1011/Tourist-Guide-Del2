@@ -19,6 +19,9 @@
         <td th:text="${attraction.description}"></td>
 
         <td>
+            <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}">edit</a>
+        </td>
+        <td>
             <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}">tag</a>
         </td>
 

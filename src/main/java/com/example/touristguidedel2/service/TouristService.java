@@ -26,4 +26,7 @@ public class TouristService {
     public void saveAttraction(TouristAttraction attraction) {
         repository.saveAttraction(attraction);
     }
+    public void updateAttraction(TouristAttraction attraction){
+        repository.
+    }
 }

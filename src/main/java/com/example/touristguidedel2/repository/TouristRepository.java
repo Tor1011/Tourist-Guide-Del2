@@ -50,6 +50,7 @@ public class TouristRepository {
                 List.of(Category.CULTURE, Category.FAMILY_FRIENDLY, Category.HISTORY)
         ));
     }
+
     // Metode til at retunere en attraktion //
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
@@ -68,6 +69,18 @@ public class TouristRepository {
     public void saveAttraction(TouristAttraction attraction) {
         attractions.add(attraction);
     }
+
+
+    public void updateAttraction(TouristAttraction attraction) {
+//        TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
+            attraction.setName(attraction.getName());
+            attraction.setDescription(attraction.getDescription());
+            attraction.setLocation(attraction.getLocation());
+            attraction.setTags(attraction.getTags());
+
+
+    }
+
 
 
 }
