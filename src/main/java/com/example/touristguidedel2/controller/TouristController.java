@@ -1,5 +1,6 @@
 package com.example.touristguidedel2.controller;
 
+import com.example.touristguidedel2.model.Category;
 import com.example.touristguidedel2.model.TouristAttraction;
 import com.example.touristguidedel2.service.TouristService;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ public class TouristController {
         this.service = touristService;
     }
 
-    // Get mapping til at kunne vise alle attraktioner //
     @GetMapping
     public String getAttractions(Model model) {
         ArrayList<TouristAttraction> attractions = service.getAttractions();
@@ -25,7 +25,6 @@ public class TouristController {
         return "showattractions";
     }
 
-    // Get mapping til at kunne finde en attraktion ved at søge på et navn //
     @GetMapping("/{name}")
     public String findAttractionByName(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
@@ -44,16 +43,26 @@ public class TouristController {
         TouristAttraction attraction = service.findAttractionByName(name);
 
         if (attraction == null) {
-            model.addAttribute("errorMessage", "The attraction " + name + " was not found");
+            model.addAttribute("errorMessage", "The attraction " + name + " has not been found");
             return "error";
         }
         model.addAttribute("attraction", attraction);
         return "showtags";
     }
 
-    @PostMapping("/update")
-    public String updatedAttraction(@ModelAttribute TouristAttraction attraction) {
-        service.updateAttraction(attraction);
+    @GetMapping("/add")
+    public String addAttraction(Model model) {
+        TouristAttraction attraction = new TouristAttraction();
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("tags", Category.values());
+        return "addnewattraction";
+    }
+
+    @PostMapping("/save")
+    public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
+        service.saveAttraction(attraction);
         return "redirect:/attractions";
     }
+
+
 }
