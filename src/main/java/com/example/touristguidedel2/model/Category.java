@@ -7,6 +7,4 @@ public enum Category {
     NATURE,
     FAMILY_FRIENDLY,
     HISTORY
-
-
 }

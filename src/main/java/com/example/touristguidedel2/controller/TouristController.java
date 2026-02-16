@@ -4,9 +4,7 @@ import com.example.touristguidedel2.model.TouristAttraction;
 import com.example.touristguidedel2.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -19,6 +17,7 @@ public class TouristController {
         this.service = touristService;
     }
 
+    // Get mapping til at kunne vise alle attraktioner //
     @GetMapping
     public String getAttractions(Model model) {
         ArrayList<TouristAttraction> attractions = service.getAttractions();
@@ -26,6 +25,7 @@ public class TouristController {
         return "showattractions";
     }
 
+    // Get mapping til at kunne finde en attraktion ved at søge på et navn //
     @GetMapping("/{name}")
     public String findAttractionByName(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
@@ -39,17 +39,21 @@ public class TouristController {
         return "attraction";
     }
 
-@GetMapping("/{name}/tags")
-    public String findTags(@PathVariable String name, Model model){
-    TouristAttraction attraction = service.findAttractionByName(name);
+    @GetMapping("/{name}/tags")
+    public String findTags(@PathVariable String name, Model model) {
+        TouristAttraction attraction = service.findAttractionByName(name);
 
-    if (attraction == null) {
-        model.addAttribute("errorMessage", "The attraction " + name + " was not found");
-        return "error";}
+        if (attraction == null) {
+            model.addAttribute("errorMessage", "The attraction " + name + " was not found");
+            return "error";
+        }
+        model.addAttribute("attraction", attraction);
+        return "showtags";
+    }
 
-    model.addAttribute("attraction", attraction);
-    return "showtags";
+    @PostMapping("/update")
+    public String updatedAttraction(@ModelAttribute TouristAttraction attraction) {
+        service.updateAttraction(attraction);
+        return "redirect:/attractions";
+    }
 }
-
-}
-

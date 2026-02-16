@@ -70,4 +70,15 @@ public class TouristRepository {
     }
 
 
+    // Metode til at kunne opdatere en attraktion //
+    public TouristAttraction updateAttraction(TouristAttraction attraction) {
+        TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
+        if (updatedAttraction != null) {
+            updatedAttraction.setDescription(attraction.getDescription());
+            updatedAttraction.setLocation(attraction.getLocation());
+            updatedAttraction.setTags(attraction.getTags());
+        }
+        return updatedAttraction;
+
+    }
 }
