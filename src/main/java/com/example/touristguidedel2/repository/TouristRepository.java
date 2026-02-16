@@ -50,6 +50,7 @@ public class TouristRepository {
                 List.of(Category.CULTURE, Category.FAMILY_FRIENDLY, Category.HISTORY)
         ));
     }
+
     // Metode til at retunere en attraktion //
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
@@ -79,6 +80,14 @@ public class TouristRepository {
             updatedAttraction.setTags(attraction.getTags());
         }
         return updatedAttraction;
+    }
 
+    // Metode til at kunne fjerne een attraktion //
+    public TouristAttraction removeAttraction(String name) {
+        TouristAttraction attraction = findAttractionByName(name);
+        if (attraction != null) {
+            attractions.remove(attraction);
+        }
+        return attraction;
     }
 }
