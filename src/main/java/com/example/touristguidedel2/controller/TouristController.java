@@ -41,11 +41,6 @@ public class TouristController {
     @GetMapping("/{name}/tags")
     public String findTags(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
-
-        if (attraction == null) {
-            model.addAttribute("errorMessage", "The attraction " + name + " has not been found");
-            return "error";
-        }
         model.addAttribute("attraction", attraction);
         return "showtags";
     }
