@@ -79,9 +79,11 @@ tr:nth-child(even) {
     a:hover {
         text-decoration: underline;
     }
+
     .name-column {
         font-weight: bold;
         font-size: 1.1em;
         color: #0077cc;
 
+    }
 }

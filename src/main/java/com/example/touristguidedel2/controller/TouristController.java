@@ -69,7 +69,7 @@ public class TouristController {
         model.addAttribute("attraction", service.findAttractionByName(name));
         model.addAttribute("cities", service.getCities());
         model.addAttribute("tags", service.getTags());
-        return "EditAttraction";
+        return "edit";
     }
 
     @PostMapping("/update")
