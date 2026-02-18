@@ -11,7 +11,8 @@
 <h1>Attractions</h1>
 
 <table>
-    <td th:if="${attractions.isEmpty()}">
+
+    <tr th:if="${attractions.isEmpty()}">
         <td colspan="4">There are no attractions yet</td>
     </tr>
 
@@ -27,24 +28,8 @@
         <td th:text="${attraction.description}"></td>
 
         <td>
-            <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}">
-                edit</a>
-
-        </td>
-        <td>
-            <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}">
-                tags</a>
-        </td>
-
-        <td>
-            <a th:href="@{/attractions/delete/{name}(name=${attraction.name})}">
-                delete</a>
-        </td>
-        <td>
-    <span th:each="tag : ${attraction.tags}"
-          th:text="${tag}"
-          style="display:inline-block; background-color: seashell; color:black; padding:2px 6px; border-radius:4px; margin-right:4px; font-size:0.9em;">
-    </span>
+            <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}"
+                style="background:#28a745; color:white; padding:5px 10px; border-radius:5px; text-decoration:none;">Tag</a>
         </td>
         <td>
             <a th:href="@{/attractions/{name}(name=${attraction.name})}"
@@ -60,10 +45,7 @@
             </form>
         </td>
 
-        <td>
-            <a th:href="@{/attractions/{name}(name=${attraction.name})}">
-                View</a>
-        </td>
+
     </tr>
 </table>
 <a th:href="@{/attractions/add}">Add new attraction</a>
