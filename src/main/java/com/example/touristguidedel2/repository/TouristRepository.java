@@ -51,6 +51,34 @@ public class TouristRepository {
         ));
     }
 
+    // Hardkodet liste med tags hentet fra klassen "Category" //
+    public List<Category> getTags() {
+        return List.of(
+                Category.CULTURE,
+                Category.NATURE,
+                Category.HISTORY,
+                Category.SIGHTSEEING,
+                Category.SHOPPING,
+                Category.FAMILY_FRIENDLY
+        );
+    }
+
+    // Hardkodet liste med byer //
+    public List<String> getCities() {
+        return List.of(
+                "København",
+                "Roskilde",
+                "Helsingør",
+                "Næstved",
+                "Køge",
+                "Slagelse",
+                "Holbæk",
+                "Kalundborg",
+                "Hillerød",
+                "Vordingborg"
+        );
+    }
+
     // Metode til at retunere en attraktion //
     public ArrayList<TouristAttraction> getAttractions() {
         return attractions;
@@ -71,28 +99,15 @@ public class TouristRepository {
     }
 
 
-    public void updateAttraction(TouristAttraction attraction) {
+    // Metode til at kunne opdatere en attraktion //
+    public TouristAttraction updateAttraction(TouristAttraction attraction) {
         TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
-        updatedAttraction.setName(attraction.getName());
-        updatedAttraction.setDescription(attraction.getDescription());
-        updatedAttraction.setLocation(attraction.getLocation());
-        updatedAttraction.setTags(attraction.getTags());
+        if (updatedAttraction != null) {
+            updatedAttraction.setDescription(attraction.getDescription());
+            updatedAttraction.setLocation(attraction.getLocation());
+            updatedAttraction.setTags(attraction.getTags());
+        }
+        return updatedAttraction;
 
     }
-
-    public void deleteAttraction(String nameOfAttraction) {
-        TouristAttraction attraction = findAttractionByName(nameOfAttraction);
-        attractions.remove(attraction);
-    }
-    public List<String> getCities(){
-        return attractions.stream()
-                .map(TouristAttraction::getLocation)
-                .distinct()
-                .toList();
-    }
-    public List<Category> getTags(){
-        return List.of(Category.values());
-    }
-
-
 }
