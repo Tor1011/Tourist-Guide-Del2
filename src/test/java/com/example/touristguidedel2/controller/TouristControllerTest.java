@@ -13,11 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
-import static javax.swing.UIManager.get;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
@@ -42,8 +41,8 @@ class TouristControllerTest {
     @Test
     void findAttractionByName() throws Exception {
         TouristAttraction attraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
-        when(service.findAttractionByName(anyString())).thenReturn(attraction);
-        mockMvc.perform(get("/{name}"))
+        when(service.findAttractionByName("Tivoli")).thenReturn(attraction);
+        mockMvc.perform(get("/Tivoli"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("attraction"))
                 .andExpect(model().attribute("description"));
