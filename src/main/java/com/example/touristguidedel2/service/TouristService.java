@@ -36,9 +36,11 @@ public class TouristService {
     public void deleteAttraction(String nameOfAttraction){
         repository.deleteAttraction(nameOfAttraction);
     }
+
     public List<String> getCities() {
         return repository.getCities();
     }
+
     public List<Category>getTags(){
         return repository.getTags();
     }

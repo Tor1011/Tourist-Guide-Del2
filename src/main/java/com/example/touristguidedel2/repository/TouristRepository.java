@@ -72,6 +72,8 @@ public class TouristRepository {
     }
 
 
+
+    // Metode til at kunne opdatere en attraktion //
     public void updateAttraction(TouristAttraction attraction) {
         TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
         updatedAttraction.setName(attraction.getName());
@@ -80,7 +82,7 @@ public class TouristRepository {
         updatedAttraction.setTags(attraction.getTags());
 
     }
-
+    // Metode til at kunne slette en attraktion
     public void deleteAttraction(String nameOfAttraction) {
         TouristAttraction attraction = findAttractionByName(nameOfAttraction);
         attractions.remove(attraction);
@@ -109,7 +111,7 @@ public class TouristRepository {
         );
     }
 
-
+    // metode til at hente "tags" fra klassen Category //
     public List<Category> getTags() {
         return List.of(Category.values());
     }
