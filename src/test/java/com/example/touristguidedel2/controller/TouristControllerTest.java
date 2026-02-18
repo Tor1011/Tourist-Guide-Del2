@@ -42,12 +42,13 @@ class TouristControllerTest {
     void findAttractionByName() throws Exception {
         TouristAttraction attraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
         when(service.findAttractionByName("Tivoli")).thenReturn(attraction);
-        mockMvc.perform(get("/Tivoli"))
+        mockMvc.perform(get("/attractions/Tivoli"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("attraction"))
-                .andExpect(model().attribute("description"));
+                .andExpect(model().attributeExists("attraction"))
+                .andExpect(model().attribute("attraction", attraction));
 
-        verify(service).findAttractionByName(attraction);
+        verify(service).findAttractionByName("Tivoli");
 
     }
 
