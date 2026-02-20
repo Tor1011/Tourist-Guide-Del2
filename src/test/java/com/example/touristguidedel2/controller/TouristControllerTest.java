@@ -11,6 +11,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,7 +36,17 @@ class TouristControllerTest {
     }
 
     @Test
-    void getAttractions() {
+    void getAttractions() throws Exception {
+        ArrayList<TouristAttraction> attractions = new ArrayList<>();
+        attractions.add(new TouristAttraction("Tivoli","Cool sted","København",List.of(Category.CULTURE)));
+        when(service.getAttractions()).thenReturn(attractions);
+
+        mockMvc.perform(get("/attractions"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("showattractions"))
+                .andExpect(model().attributeExists("attractions"))
+                .andExpect(model().attribute("attractions", attractions));
+        verify(service).getAttractions();
     }
 
     @Test
