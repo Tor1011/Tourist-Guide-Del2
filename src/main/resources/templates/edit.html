@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/main.css}" rel="stylesheet">
+
 </head>
 <body>
+<div class="headder">
+<h1  th:text="'Update ' + *{name}">Update Attraction </h1>
+
+</div>
 <!--<form action="#" th:action="@{/attractions/update}" th:object="${attraction}" method="post">-->
 <!--    <input type="hidden" th:field="*{name}"/>-->
 <!--    <br>-->
@@ -28,17 +34,17 @@
 
     <input type="hidden" th:field="*{name}"/>
 
-    <h2 th:text="*{name}" id="name" />
     <br/>
 
-    <h3 th:text ="description">Description:</h3>
+    <h3 th:text="'Update description for ' + *{name}">Description:</h3>
     <textarea th:field="*{description}" id="description" rows="20" cols="60" required></textarea><br><br/>
 
-    <label th:text>City:</label>
+    <div class="container">
+    <p th:text="'Choose the city for ' + *{name}">City:</p>
     <select th:field="*{location}">
         <option th:each="city: ${cities}" th:value="${city}" th:text="${city}"></option>
     </select>
-
+    </div>
     <br/>
 
 
@@ -48,7 +54,7 @@
         <label th:for="${tag}" th:text="${tag}"></label><br/>
     </div>
     <br/>
-    <button type="submit">Add Attraction</button>
+    <button type="submit">Update Attraction</button>
 </form>
 <a th:href="@{/attractions}">Back to List </a>
 
