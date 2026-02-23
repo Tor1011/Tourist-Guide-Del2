@@ -45,6 +45,10 @@
             </form>
         </td>
 
+        <td>
+            <a th:href="@{/attractions/delete/{name}(name=${attraction.name})}" method="post"
+               style="background-color: cornflowerblue; color:white; padding:5px 10px; border:none; border-radius:5px; cursor:pointer;">Delete</a>
+        </td>
 
     </tr>
 </table>
