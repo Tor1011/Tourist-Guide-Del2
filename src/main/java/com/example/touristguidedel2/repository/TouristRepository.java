@@ -86,13 +86,6 @@ public class TouristRepository {
         attractions.remove(attraction);
     }
 
-//    public List<String> getCities() {
-//        return attractions.stream()
-//                .map(TouristAttraction::getLocation)
-//                .distinct()
-//                .toList();
-//    }
-
         // Hardkodet liste med byer //
     public List<String> getCities() {
         return List.of(

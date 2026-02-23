@@ -1,15 +1,31 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>See Attraction</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 
 
 <body>
-<h1 th:text="${attraction.getName()}"/>
 
-<p th:text="${attraction.description}"></p>
+<div class="header">
+    <h1 th:text="'Visit ' + ${attraction.name}">Visit Attraction</h1>
+</div>
+
+<div class="info-box">
+    <label>Description:</label>
+    <div class="read-only-box"
+         th:text="${attraction.description}">
+    </div>
+</div>
+<br>
+<div class="info-box">
+    <label>City:</label>
+    <div class="read-only-box"
+         th:text="${attraction.location}">
+    </div>
+</div>
 
 </body>
 </html>
