@@ -88,7 +88,7 @@ class TouristControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("addnewattraction"))
                 .andExpect(model().attributeExists("tags"))
-                .andExpect(model().attribute("tags",mockTags));
+                .andExpect(model().attribute("tags", mockTags));
     }
 
     @Test
@@ -96,7 +96,22 @@ class TouristControllerTest {
     }
 
     @Test
-    void editAttraction() {
+    void editAttraction() throws Exception {
+        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
+        when(service.findAttractionByName("Tivoli")).thenReturn(mockAttraction);
+
+        List<String> mockCities = List.of("København", "Roskilde");
+        when(service.getCities()).thenReturn(mockCities);
+
+        List<Category> mockTags = List.of(Category.values());
+        when(service.getTags()).thenReturn(mockTags);
+
+        mockMvc.perform(get("/attractions/Tivoli/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("edit"))
+                .andExpect(model().attribute("attraction", mockAttraction))
+                .andExpect(model().attribute("cities", mockCities))
+                .andExpect(model().attribute("tags", mockTags));
     }
 
     @Test
