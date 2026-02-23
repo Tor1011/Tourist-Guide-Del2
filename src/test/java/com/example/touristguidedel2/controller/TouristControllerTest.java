@@ -36,6 +36,7 @@ class TouristControllerTest {
 
     @Test
     void getAttractions() {
+
     }
 
     @Test
@@ -49,7 +50,6 @@ class TouristControllerTest {
                 .andExpect(model().attribute("attraction", attraction));
 
         verify(service).findAttractionByName("Tivoli");
-
     }
 
     @Test
