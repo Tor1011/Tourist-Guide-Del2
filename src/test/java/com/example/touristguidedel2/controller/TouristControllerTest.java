@@ -6,6 +6,7 @@ import com.example.touristguidedel2.service.TouristService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -15,9 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import static com.example.touristguidedel2.model.Category.CULTURE;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest
@@ -38,7 +42,7 @@ class TouristControllerTest {
     @Test
     void getAttractions() throws Exception {
         ArrayList<TouristAttraction> mockList = new ArrayList<>();
-        mockList.add(new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE)));
+        mockList.add(new TouristAttraction("Tivoli", "Cool sted", "København", List.of(CULTURE)));
         when(service.getAttractions()).thenReturn(mockList);
 
         mockMvc.perform(get("/attractions"))
@@ -52,7 +56,7 @@ class TouristControllerTest {
 
     @Test
     void findAttractionByName() throws Exception {
-        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
+        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(CULTURE));
         when(service.findAttractionByName("Tivoli")).thenReturn(mockAttraction);
 
         mockMvc.perform(get("/attractions/Tivoli"))
@@ -67,7 +71,7 @@ class TouristControllerTest {
 
     @Test
     void findTags() throws Exception {
-        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
+        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(CULTURE));
         when(service.findAttractionByName("Tivoli")).thenReturn(mockAttraction);
 
         mockMvc.perform(get("/attractions/Tivoli/tags"))
@@ -92,12 +96,29 @@ class TouristControllerTest {
     }
 
     @Test
-    void saveAttraction() {
+    void saveAttraction() throws Exception{
+
+        mockMvc.perform(post("/attractions/save")
+                .param("name","Tivoli")
+                .param("description","Sted i København")
+                .param("location", "København")
+                .param("tags", "CULTURE"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/attractions"));
+        ArgumentCaptor<TouristAttraction> captor = ArgumentCaptor.forClass(TouristAttraction.class);
+        verify(service).saveAttraction(captor.capture());
+
+        TouristAttraction attraction = captor.getValue();
+        assertEquals("Tivoli", attraction.getName());
+        assertEquals("Sted i København", attraction.getDescription());
+        assertEquals("København", attraction.getLocation());
+        assertEquals( List.of(CULTURE), attraction.getTags());
+
     }
 
     @Test
     void editAttraction() throws Exception {
-        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
+        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(CULTURE));
         when(service.findAttractionByName("Tivoli")).thenReturn(mockAttraction);
 
         List<String> mockCities = List.of("København", "Roskilde");
