@@ -11,6 +11,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,29 +36,59 @@ class TouristControllerTest {
     }
 
     @Test
-    void getAttractions() {
+    void getAttractions() throws Exception {
+        ArrayList<TouristAttraction> mockList = new ArrayList<>();
+        mockList.add(new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE)));
+        when(service.getAttractions()).thenReturn(mockList);
+
+        mockMvc.perform(get("/attractions"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("showattractions"))
+                .andExpect(model().attributeExists("attractions"))
+                .andExpect(model().attribute("attractions", mockList));
+
+        verify(service).getAttractions();
     }
 
     @Test
     void findAttractionByName() throws Exception {
-        TouristAttraction attraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
-        when(service.findAttractionByName("Tivoli")).thenReturn(attraction);
+        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
+        when(service.findAttractionByName("Tivoli")).thenReturn(mockAttraction);
+
         mockMvc.perform(get("/attractions/Tivoli"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("attraction"))
                 .andExpect(model().attributeExists("attraction"))
-                .andExpect(model().attribute("attraction", attraction));
+                .andExpect(model().attribute("attraction", mockAttraction));
 
         verify(service).findAttractionByName("Tivoli");
 
     }
 
     @Test
-    void findTags() {
+    void findTags() throws Exception {
+        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
+        when(service.findAttractionByName("Tivoli")).thenReturn(mockAttraction);
+
+        mockMvc.perform(get("/attractions/Tivoli/tags"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("showtags"))
+                .andExpect(model().attributeExists("attraction"))
+                .andExpect(model().attribute("attraction", mockAttraction));
+
+        verify(service).findAttractionByName("Tivoli");
     }
 
     @Test
-    void addAttraction() {
+    void addAttraction() throws Exception {
+        List<Category> mockTags = List.of(Category.values());
+        when(service.getTags()).thenReturn(mockTags);
+
+        mockMvc.perform(get("/attractions/add"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("addnewattraction"))
+                .andExpect(model().attributeExists("tags"))
+                .andExpect(model().attribute("tags",mockTags));
     }
 
     @Test
