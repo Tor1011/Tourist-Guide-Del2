@@ -9,17 +9,15 @@
 <body>
 <div class="headder">
 <h1  th:text="'Update ' + *{name}">Update Attraction </h1>
-
 </div>
 
 <form th:action="@{/attractions/update}" th:object="${attraction}" method="post">
-
     <input type="hidden" th:field="*{name}"/>
-
     <br/>
 
     <h3 th:text="'Update description for ' + *{name}">Description:</h3>
-    <textarea th:field="*{description}" id="description" rows="20" cols="60" required></textarea><br><br/>
+    <textarea th:field="*{description}" id="description" rows="20" cols="60" required></textarea>
+    <br/>
 
     <div class="container">
     <p th:text="'Choose the city for ' + *{name}">City:</p>
@@ -27,6 +25,7 @@
         <option th:each="city: ${cities}" th:value="${city}" th:text="${city}"></option>
     </select>
     </div>
+
     <br/>
 
 
