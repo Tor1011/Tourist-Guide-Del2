@@ -136,7 +136,23 @@ class TouristControllerTest {
     }
 
     @Test
-    void updateAttraction() {
+    void updateAttraction() throws Exception{
+        mockMvc.perform(post("/attractions/update")
+                        .param("name","Tivoli")
+                        .param("description","Sted i København")
+                        .param("location", "København")
+                        .param("tags", "CULTURE"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/attractions"));
+        ArgumentCaptor<TouristAttraction> captor = ArgumentCaptor.forClass(TouristAttraction.class);
+        verify(service).updateAttraction(captor.capture());
+
+        TouristAttraction attraction = captor.getValue();
+        assertEquals("Tivoli", attraction.getName());
+        assertEquals("Sted i København", attraction.getDescription());
+        assertEquals("København", attraction.getLocation());
+        assertEquals( List.of(CULTURE), attraction.getTags());
+
     }
 
     @Test
