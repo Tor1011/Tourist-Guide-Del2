@@ -140,6 +140,14 @@ class TouristControllerTest {
     }
 
     @Test
-    void deleteAttraction() {
+    void deleteAttraction() throws Exception {
+        TouristAttraction mockAttraction = new TouristAttraction("Tivoli", "Cool sted", "København", List.of(Category.CULTURE));
+        when(service.findAttractionByName("Tivoli")).thenReturn(mockAttraction);
+
+        mockMvc.perform(post("/attractions/delete/Tivoli"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/attractions"));
+
+        verify(service).deleteAttraction("Tivoli");
     }
 }
