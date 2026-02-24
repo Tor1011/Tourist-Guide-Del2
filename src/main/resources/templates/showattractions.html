@@ -29,15 +29,15 @@
 
         <td>
             <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}"
-                style="background:#28a745; color:white; padding:5px 10px; border-radius:5px; text-decoration:none;">Tag</a>
+           >Tag</a>
         </td>
         <td>
             <a th:href="@{/attractions/{name}(name=${attraction.name})}"
-               style="background:#28a745; color:white; padding:5px 10px; border-radius:5px; text-decoration:none;">View</a>
+               >View</a>
         </td>
         <td>
             <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}"
-               style="background-color: cadetblue;; color:white; padding:5px 10px; border-radius:5px; text-decoration:none;">Edit</a>
+              >Edit</a>
         </td>
         <td>
             <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post">
