@@ -31,14 +31,6 @@ class TouristControllerTest {
     @MockitoBean
     TouristService service;
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void getAttractions() throws Exception {
         ArrayList<TouristAttraction> mockList = new ArrayList<>();
@@ -96,13 +88,13 @@ class TouristControllerTest {
     }
 
     @Test
-    void saveAttraction() throws Exception{
+    void saveAttraction() throws Exception {
 
         mockMvc.perform(post("/attractions/save")
-                .param("name","Tivoli")
-                .param("description","Sted i København")
-                .param("location", "København")
-                .param("tags", "CULTURE"))
+                        .param("name", "Tivoli")
+                        .param("description", "Sted i København")
+                        .param("location", "København")
+                        .param("tags", "CULTURE"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/attractions"));
         ArgumentCaptor<TouristAttraction> captor = ArgumentCaptor.forClass(TouristAttraction.class);
@@ -112,7 +104,7 @@ class TouristControllerTest {
         assertEquals("Tivoli", attraction.getName());
         assertEquals("Sted i København", attraction.getDescription());
         assertEquals("København", attraction.getLocation());
-        assertEquals( List.of(CULTURE), attraction.getTags());
+        assertEquals(List.of(CULTURE), attraction.getTags());
 
     }
 
@@ -136,10 +128,10 @@ class TouristControllerTest {
     }
 
     @Test
-    void updateAttraction() throws Exception{
+    void updateAttraction() throws Exception {
         mockMvc.perform(post("/attractions/update")
-                        .param("name","Tivoli")
-                        .param("description","Sted i København")
+                        .param("name", "Tivoli")
+                        .param("description", "Sted i København")
                         .param("location", "København")
                         .param("tags", "CULTURE"))
                 .andExpect(status().is3xxRedirection())
@@ -151,7 +143,7 @@ class TouristControllerTest {
         assertEquals("Tivoli", attraction.getName());
         assertEquals("Sted i København", attraction.getDescription());
         assertEquals("København", attraction.getLocation());
-        assertEquals( List.of(CULTURE), attraction.getTags());
+        assertEquals(List.of(CULTURE), attraction.getTags());
 
     }
 

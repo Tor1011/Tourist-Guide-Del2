@@ -47,7 +47,7 @@ public class TouristRepository {
                 "The Viking Ship Museum",
                 "With the sound of the waves and smell of wet wood, the Viking Ship Museum is located right by Roskilde Fjord and it is a great visit for anyone with Viking blood in their veins." +
                         "Here you have plenty of activities, history, atmosphere and beautiful harbor - you can even go sailing.",
-                "Roskilde" + "Vindeboder 12",
+                "Roskilde",
                 List.of(Category.CULTURE, Category.FAMILY_FRIENDLY, Category.HISTORY)
         ));
     }
@@ -73,20 +73,22 @@ public class TouristRepository {
 
 
     public void updateAttraction(TouristAttraction attraction) {
-        TouristAttraction updatedAttraction = findAttractionByName(attraction.getName());
-        updatedAttraction.setName(attraction.getName());
-        updatedAttraction.setDescription(attraction.getDescription());
-        updatedAttraction.setLocation(attraction.getLocation());
-        updatedAttraction.setTags(attraction.getTags());
-
+        TouristAttraction existingAttraction = findAttractionByName(attraction.getName());
+        if (existingAttraction != null) {
+            existingAttraction.setDescription(attraction.getDescription());
+            existingAttraction.setLocation(attraction.getLocation());
+            existingAttraction.setTags(attraction.getTags());
+        }
     }
 
     public void deleteAttraction(String nameOfAttraction) {
         TouristAttraction attraction = findAttractionByName(nameOfAttraction);
-        attractions.remove(attraction);
+        if (attraction != null) {
+            attractions.remove(attraction);
+        }
     }
 
-        // Hardkodet liste med byer //
+    // Hardkodet liste med byer //
     public List<String> getCities() {
         return List.of(
                 "København",
