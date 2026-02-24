@@ -1,6 +1,5 @@
 package com.example.touristguidedel2.controller;
 
-import com.example.touristguidedel2.model.Category;
 import com.example.touristguidedel2.model.TouristAttraction;
 import com.example.touristguidedel2.service.TouristService;
 import org.springframework.stereotype.Controller;
