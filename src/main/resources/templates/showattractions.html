@@ -40,15 +40,11 @@
                style="background-color: cadetblue;; color:white; padding:5px 10px; border-radius:5px; text-decoration:none;">Edit</a>
         </td>
         <td>
-            <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post" style="display:inline;">
+            <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post">
                 <button type="submit" style="background-color: cornflowerblue; color:white; padding:5px 10px; border:none; border-radius:5px; cursor:pointer;">Delete</button>
             </form>
         </td>
 
-        <td>
-            <a th:href="@{/attractions/delete/{name}(name=${attraction.name})}" method="post"
-               style="background-color: cornflowerblue; color:white; padding:5px 10px; border:none; border-radius:5px; cursor:pointer;">Delete</a>
-        </td>
 
     </tr>
 </table>
