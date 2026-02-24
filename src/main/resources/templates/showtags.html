@@ -4,23 +4,21 @@
     <meta charset="UTF-8">
     <title>Tags</title>
     <link th:href="@{/css/main.css}" rel="stylesheet">
-
 </head>
+
 <body>
-<h1 th:text="${attraction.getName()} + ' tags'"/>
+
+<h1 th:text="${attraction.name} + ' Tags'"></h1>
 
 <table>
-
-       <tr th:each="tag:${attraction.getTags()}">
-
-           <td th:text="${tag}">
-
-           </td>
-
-  </tr>
+    <tbody>
+    <tr th:each="tag : ${attraction.tags}">
+        <td th:text="${tag}"></td>
+    </tr>
+    </tbody>
 </table>
 
-<a th:href="@{/attractions}">Back to List </a>
+<a th:href="@{/attractions}">Back to List</a>
 
 </body>
 </html>

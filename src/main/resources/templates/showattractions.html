@@ -11,43 +11,51 @@
 <h1>Attractions</h1>
 
 <table>
-
-    <tr th:if="${attractions.isEmpty()}">
-        <td colspan="4">There are no attractions yet</td>
+    <tbody th:if="${attractions.isEmpty()}">
+    <tr>
+        <td colspan="6">There are no attractions yet</td>
     </tr>
+    </tbody>
 
-    <tr th:if="${!attractions.isEmpty()}">
+    <thead th:unless="${attractions.isEmpty()}">
+    <tr>
         <th>Name</th>
         <th>Description</th>
         <th>Tags</th>
         <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
+    </thead>
 
+    <tbody>
     <tr th:each="attraction : ${attractions}">
-        <td th:text="${attraction.name}"></td>
+        <td th:text="${attraction.name}" class="name-column"></td>
         <td th:text="${attraction.description}"></td>
 
         <td>
-            <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}"
-           >Tag</a>
+            <a th:href="@{/attractions/{name}/tags(name=${attraction.name})}">Tags</a>
         </td>
+
         <td>
-            <a th:href="@{/attractions/{name}(name=${attraction.name})}"
-               >View</a>
+            <a th:href="@{/attractions/{name}(name=${attraction.name})}">View</a>
         </td>
+
         <td>
-            <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}"
-              >Edit</a>
+            <a th:href="@{/attractions/{name}/edit(name=${attraction.name})}">Edit</a>
         </td>
+
         <td>
             <form th:action="@{/attractions/delete/{name}(name=${attraction.name})}" method="post">
-                <button type="submit" style="background-color: cornflowerblue; color:white; padding:5px 10px; border:none; border-radius:5px; cursor:pointer;">Delete</button>
+                <button type="submit">Delete</button>
             </form>
         </td>
-//PUSH TEST
-
     </tr>
+    </tbody>
 </table>
+
+<br>
 <a th:href="@{/attractions/add}">Add new attraction</a>
+
 </body>
 </html>
