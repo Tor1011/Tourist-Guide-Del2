@@ -71,7 +71,7 @@ public class TouristRepository {
         attractions.add(attraction);
     }
 
-
+    // Metode til at kunne opdatere en attraktion //
     public void updateAttraction(TouristAttraction attraction) {
         TouristAttraction existingAttraction = findAttractionByName(attraction.getName());
         if (existingAttraction != null) {
@@ -81,6 +81,7 @@ public class TouristRepository {
         }
     }
 
+    // Metode til at kunne slette
     public void deleteAttraction(String nameOfAttraction) {
         TouristAttraction attraction = findAttractionByName(nameOfAttraction);
         if (attraction != null) {

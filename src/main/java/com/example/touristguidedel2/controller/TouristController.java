@@ -5,6 +5,7 @@ import com.example.touristguidedel2.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 
 @Controller
@@ -26,15 +27,20 @@ public class TouristController {
     @GetMapping("/{name}")
     public String findAttractionByName(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
-        model.addAttribute("attraction", attraction);
-        return "attraction";
+            model.addAttribute("attraction", attraction);
+            return "attraction";
     }
 
     @GetMapping("/{name}/tags")
     public String findTags(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
-        model.addAttribute("attraction", attraction);
-        return "showtags";
+
+        if (attraction != null) {
+            model.addAttribute("attraction", attraction);
+            return "showtags";
+        }else {
+            return "attraction_not_found";
+        }
     }
 
     @GetMapping("/add")
@@ -50,7 +56,7 @@ public class TouristController {
     public String saveAttraction(@ModelAttribute TouristAttraction attraction) {
         service.saveAttraction(attraction);
         return "redirect:/attractions";
-}
+    }
 
     @GetMapping("/{name}/edit")
     public String editAttraction(@PathVariable String name, Model model) {
