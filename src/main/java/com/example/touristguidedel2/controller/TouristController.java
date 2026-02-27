@@ -27,20 +27,20 @@ public class TouristController {
     @GetMapping("/{name}")
     public String findAttractionByName(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
+
+        if (attraction != null) {
             model.addAttribute("attraction", attraction);
             return "attraction";
+        }else {
+            return "attraction_not_found";
+        }
     }
 
     @GetMapping("/{name}/tags")
     public String findTags(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.findAttractionByName(name);
-
-        if (attraction != null) {
             model.addAttribute("attraction", attraction);
             return "showtags";
-        }else {
-            return "attraction_not_found";
-        }
     }
 
     @GetMapping("/add")
